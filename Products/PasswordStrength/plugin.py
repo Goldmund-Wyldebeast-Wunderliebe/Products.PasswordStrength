@@ -121,57 +121,57 @@ class PasswordStrength(BasePlugin, Cacheable):
     _properties = ( { 'id'    : 'title'
                     , 'label' : 'Title'
                     , 'type'  : 'string'
-                    , 'mode'  : 'w'
+                    , 'mode'  : 'wd'
                     }
                   , { 'id'    : 'p1_re'
                     , 'label' : 'Policy 1 Regular Expression'
                     , 'type'  : 'string'
-                    , 'mode'  : 'w'
+                    , 'mode'  : 'wd'
                     }
                   , { 'id'    : 'p1_err'
                     , 'label' : 'Policy 1 Error Message'
                     , 'type'  : 'string'
-                    , 'mode'  : 'w'
+                    , 'mode'  : 'wd'
                     }
                   , { 'id'    : 'p2_re'
                     , 'label' : 'Policy 2 Regular Expression'
                     , 'type'  : 'string'
-                    , 'mode'  : 'w'
+                    , 'mode'  : 'wd'
                     }
                   , { 'id'    : 'p2_err'
                     , 'label' : 'Policy 2 Error Message'
                     , 'type'  : 'string'
-                    , 'mode'  : 'w'
+                    , 'mode'  : 'wd'
                     }
                   , { 'id'    : 'p3_re'
                     , 'label' : 'Policy 3 Regular Expression'
                     , 'type'  : 'string'
-                    , 'mode'  : 'w'
+                    , 'mode'  : 'wd'
                     }
                   , { 'id'    : 'p3_err'
                     , 'label' : 'Policy 3 Error Message'
                     , 'type'  : 'string'
-                    , 'mode'  : 'w'
+                    , 'mode'  : 'wd'
                     }
                   , { 'id'    : 'p4_re'
                     , 'label' : 'Policy 4 Regular Expression'
                     , 'type'  : 'string'
-                    , 'mode'  : 'w'
+                    , 'mode'  : 'wd'
                     }
                   , { 'id'    : 'p4_err'
                     , 'label' : 'Policy 4 Error Message'
                     , 'type'  : 'string'
-                    , 'mode'  : 'w'
+                    , 'mode'  : 'wd'
                     }
                   , { 'id'    : 'p5_re'
                     , 'label' : 'Policy 5 Regular Expression'
                     , 'type'  : 'string'
-                    , 'mode'  : 'w'
+                    , 'mode'  : 'wd'
                     }
                   , { 'id'    : 'p5_err'
                     , 'label' : 'Policy 5 Error Message'
                     , 'type'  : 'string'
-                    , 'mode'  : 'w'
+                    , 'mode'  : 'wd'
                     }
                   )
 
@@ -179,15 +179,15 @@ class PasswordStrength(BasePlugin, Cacheable):
     def __init__(self, id, title=None):
         self._id = self.id = id
         self.title = title
-        
+
         i = 1
         for reg,err in DEFUALT_POLICIES:
             setattr(self, 'p%i_re' % i, reg)
             setattr(self, 'p%i_err' % i, err)
             i+=1
-        
-        
-        
+
+
+
 
     security.declarePrivate('validateUserInfo')
     def validateUserInfo(self, user, set_id, set_info ):
@@ -203,10 +203,10 @@ class PasswordStrength(BasePlugin, Cacheable):
         """
 
         errors = []
-        
-        if set_info and set_info.get('password', None) is not None: 
+
+        if set_info and set_info.get('password', None) is not None:
             password = set_info['password']
-            
+
             i = 1
             while True:
                 reg = getattr(self, 'p%i_re' % i, None)
@@ -217,7 +217,7 @@ class PasswordStrength(BasePlugin, Cacheable):
                     errors += [err]
                 i += 1
 
-            errors = [{'id':'password','error':e} for e in errors] 
+            errors = [{'id':'password','error':e} for e in errors]
         return errors
 
     def getPropertiesForUser(self, user, request=None):
