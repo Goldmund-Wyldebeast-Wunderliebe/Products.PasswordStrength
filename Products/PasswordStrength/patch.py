@@ -1,7 +1,7 @@
 
 import logging
 
-logger = logging.getLogger('Plone')
+logger = logging.getLogger('PasswordStrength')
 
 
 PATTERN = '__PasswordStength_%s__'
